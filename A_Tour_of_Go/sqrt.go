@@ -1,30 +1,25 @@
 package main
 
-import(
-    "fmt"
-    "math"
+import (
+	"fmt"
+	"math"
 )
 
+//Sqrt returns a square root of a parameter.
+// ex. Sqrt(8) will be 2
 func Sqrt(x float64) float64 {
-    z := float64(0)
-    z = 1
-    for i := 0; i < 11; i++{
-        next_z := float64(0)
-        next_z = z - (z * z - x) / (2 * z)
-        if next_z == z{
-            fmt.Println("break")
-            fmt.Println(next_z)
-            fmt.Println(z)
-            break
-        }else{
-            z = next_z
-        }
-    }
-    return z
+	z := float64(1)
+	zBefore := float64(1.1)
+	diff := float64(100)
+	for diff > 0.000001 {
+		zBefore = z
+		z = z - (z*z-x)/(2*z)
+		diff = math.Abs(z - zBefore)
+	}
+	return z
 }
 
-func main(){
-    fmt.Println("My Sqrt(2) = " , Sqrt(2))
-    fmt.Println("math.Sqrt(2) = ", math.Sqrt(2))
+func main() {
+	fmt.Println(Sqrt(2))
+	fmt.Println(math.Sqrt(2))
 }
-
